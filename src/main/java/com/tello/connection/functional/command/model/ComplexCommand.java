@@ -1,11 +1,12 @@
 package com.tello.connection.functional.command.model;
 
 import com.tello.connection.CommandStrings;
+import com.tello.logger.Logger;
 
 import java.util.LinkedList;
 import java.util.StringJoiner;
 
-public class ComplexCommand extends AbstractCommand{
+public class ComplexCommand extends AbstractCommand {
 
     LinkedList<Object> parameters;
 
@@ -17,8 +18,16 @@ public class ComplexCommand extends AbstractCommand{
         super(command, isRead);
     }
 
-    public boolean addParam(Object param){
-        return parameters.add(param);
+    public ComplexCommand(BasicCommand basicCommand){
+        super(basicCommand.getCommand(), basicCommand.isRead());
+    }
+
+    public boolean addParam(Object param) {
+        if (param != null) {
+            return parameters.add(param);
+        }
+        Logger.INSTANCE.warning("The param you tried to add is null");
+        return false;
     }
 
     @Override

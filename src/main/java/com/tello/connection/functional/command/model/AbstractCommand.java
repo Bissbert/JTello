@@ -25,7 +25,7 @@ public abstract class AbstractCommand implements Command {
         this.command = command;
     }
 
-    protected boolean isRead() {
+    public boolean isRead() {
         return isRead;
     }
 
