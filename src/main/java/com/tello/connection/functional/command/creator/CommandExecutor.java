@@ -27,6 +27,12 @@ public abstract class CommandExecutor {
         return new BasicExecutor(command);
     }
 
+    public static void closeConnection(){
+        if (connection != null){
+            connection.close();
+        }
+    }
+
     public abstract CommandExecutor withParam(Object object);
 
     public CommandExecutor withReadAndSaveIn(Reference<String> reference) {
