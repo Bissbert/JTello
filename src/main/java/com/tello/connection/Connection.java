@@ -1,12 +1,14 @@
 package com.tello.connection;
 
 import com.tello.logger.Logger;
+
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class Connection {
+public class Connection implements Closeable {
     private final String host;
     private final int port;
     private InetAddress address;
@@ -52,16 +54,16 @@ public class Connection {
     public boolean confirmationCommand(String command) {
         String response = sendAndReceiveCommand(command);
         System.out.println(response.length());
-        if(response.equalsIgnoreCase("ok")) {
+        if (response.equalsIgnoreCase("ok")) {
             return true;
         }
         return false;
     }
 
     public void sendCommand(String command) {
-        if(this.socket.isConnected()) {
-            if(command != null) {
-                if(command.length() > 0) {
+        if (this.socket.isConnected()) {
+            if (command != null) {
+                if (command.length() > 0) {
                     final byte[] data = command.getBytes();
                     final DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
                     try {
@@ -70,13 +72,13 @@ public class Connection {
                     } catch (IOException e) {
                         Logger.INSTANCE.error("Error when sending packet" + host + ":" + port, e);
                     }
-                }else {
+                } else {
                     Logger.INSTANCE.error("Command is empty!");
                 }
-            }else {
+            } else {
                 Logger.INSTANCE.error("Command is null!");
             }
-        }else {
+        } else {
             Logger.INSTANCE.error("UDP Socket is not connected! " + host + ":" + port);
         }
     }

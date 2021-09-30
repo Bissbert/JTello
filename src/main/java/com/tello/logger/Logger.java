@@ -42,7 +42,7 @@ public class Logger {
      */
     public String debug(String message) {
         if(!this.debug) return null;
-        var output = DEBUG_PREFIX + message;
+        String output = DEBUG_PREFIX + message;
         output = output.replace("\n", "\n" + Logger.repeat(ERROR_PREFIX.length(), " "));
         System.out.println(output);
         return output;
@@ -53,7 +53,7 @@ public class Logger {
      * @return the printed message
      */
     public String error(String message) {
-        var output = ERROR_PREFIX + message;
+        String output = ERROR_PREFIX + message;
         output = output.replace("\n", "\n" + Logger.repeat(ERROR_PREFIX.length(), " "));
         System.err.println(output);
         this.messages.add(LocalDateTime.now().toString() + " : " + output);
@@ -67,7 +67,7 @@ public class Logger {
      * @return the printed message
      */
     public String error(String message, Exception exception) {
-        var output = ERROR_PREFIX + message + "\nMore infos on the printed stacktrace: " + exception.getMessage();
+        String output = ERROR_PREFIX + message + "\nMore infos on the printed stacktrace: " + exception.getMessage();
         output = output.replace("\n", "\n" + Logger.repeat(ERROR_PREFIX.length(), " "));
         System.err.println(output);
         this.messages.add(LocalDateTime.now().toString() + " : " + output);
@@ -80,7 +80,7 @@ public class Logger {
      * @return the printed message
      */
     public String information(String message) {
-        var output = INFORMATION_PREFIX + message;
+        String output = INFORMATION_PREFIX + message;
         output = output.replace("\n", "\n" + Logger.repeat(INFORMATION_PREFIX.length(), " "));
         System.out.println(output);
         this.messages.add(LocalDateTime.now().toString() + " : " + output);
@@ -93,7 +93,7 @@ public class Logger {
      * @return the printed message
      */
     public String warning(String message) {
-        var output = WARNING_PREFIX + message;
+        String output = WARNING_PREFIX + message;
         System.out.println(output);
         this.messages.add(LocalDateTime.now().toString() + " : " + output);
         return output;

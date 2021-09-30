@@ -2,6 +2,11 @@ package com.tello.connection.impl;
 
 import com.tello.connection.Connection;
 
+/**
+ * Controller for a tello drone
+ *
+ * Using this
+ */
 public class TelloController extends Connection {
     public static final String host = "192.168.10.1";
     public static final int port = 8889;
@@ -149,11 +154,17 @@ public class TelloController extends Connection {
 
     /**
      * set wifi ssid password
+     * @param password new password for the wifi
+     * @return whether password was set
      */
     public boolean setWifiPassword(String password) {
         return super.confirmationCommand("wifi ssid " + password);
     }
 
+    /**
+     * fetches the battery value in percent
+     * @return percent of battery remaining in percent
+     */
     public int getBattery() {
         String response = super.sendAndReceiveCommand("battery?");
         System.out.println(response);

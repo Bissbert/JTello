@@ -1,15 +1,16 @@
 package com.tello.connection;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-public abstract class Server extends Thread {
+public abstract class Server extends Thread implements Closeable {
     private DatagramSocket socket;
     private boolean running;
-    private byte[] buf = new byte[2048];
-    private int port;
+    private byte[] buf;
+    private final int port;
 
     public Server(int port, int length) {
         this.port = port;

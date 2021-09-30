@@ -4,7 +4,9 @@ import com.tello.connection.impl.TelloCamServer;
 import com.tello.connection.impl.TelloController;
 import com.tello.connection.impl.TelloStatusServer;
 
-public class Tello {
+import java.io.Closeable;
+
+public class Tello implements Closeable {
     private TelloController controller;
     private TelloStatusServer statusListener;
     private TelloCamServer camListener;
@@ -23,5 +25,10 @@ public class Tello {
 
     public TelloController getController() {
         return this.controller;
+    }
+
+    @Override
+    public void close() {
+        shutdownGracefully();
     }
 }
